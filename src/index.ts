@@ -1,9 +1,10 @@
 import fetch from 'cross-fetch';
-import type{ O } from 'ts-toolbelt';
+import type { O } from 'ts-toolbelt';
 import { toBase64 } from './lib';
-import type{ BlockInfo } from './types/BlockInfo';
-import type{ Dispense, DispenseField } from './types/Dispense';
-import type{ Dispenser, DispenserField } from './types/Dispenser';
+import type { BlockInfo } from './types/BlockInfo';
+import type { Dispense, DispenseField } from './types/Dispense';
+import type { Dispenser, DispenserField } from './types/Dispenser';
+import type { Order } from './types/Order';
 
 export class CounterpartyClient {
   constructor(
@@ -39,6 +40,12 @@ export class CounterpartyClient {
     const { result } = await response.json();
     return result;
   };
+
+  getOrders = async(optionalParameters?: Parameters<keyof Order>): Promise<Order[]> => {
+    const response = await this.fetch('get_orders', optionalParameters);
+    const { result } = await response.json();
+    return result;
+  }
 
   private fetch = async <T extends FetchParameters>(
     method: Method,
@@ -76,7 +83,7 @@ type Parameters<T> = {
   limit?: number;
   order_by?: T;
   order_dir?: OrderDir;
-  status?: 0 | 1 | 10;
+  status?: FetchParameters['status']
 };
 
 type Filter = {
@@ -90,7 +97,7 @@ type FetchParameters = {
   order_by?: string;
   order_dir?: OrderDir;
   limit?: number;
-  status?: 0 | 1 | 10;
+  status?: 0 | 1 | 10 | 'filled' | 'open';
 };
 type Method =
   | 'get_assets'

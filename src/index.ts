@@ -13,6 +13,12 @@ export class CounterpartyClient {
     private readonly password: string
   ) {}
 
+  getAssetInfo = async (assets: string[]): Promise<AssetInfo[]> => {
+    const response = await this.fetch('get_asset_info', { assets });
+    const { result } = await response.json();
+    return result;
+  };
+
   getBlockInfo = async (block_index: number): Promise<BlockInfo> => {
     const response = await this.fetch('get_block_info', { block_index });
     const { result } = await response.json();
@@ -23,7 +29,7 @@ export class CounterpartyClient {
     const response = await this.fetch('get_blocks', { block_indexes });
     const { result } = await response.json();
     return result;
-  }
+  };
 
   getDispensers = async (
     optionalParameters?: Parameters<DispenserField>
@@ -41,11 +47,13 @@ export class CounterpartyClient {
     return result;
   };
 
-  getOrders = async(optionalParameters?: Parameters<keyof Order>): Promise<Order[]> => {
+  getOrders = async (
+    optionalParameters?: Parameters<keyof Order>
+  ): Promise<Order[]> => {
     const response = await this.fetch('get_orders', optionalParameters);
     const { result } = await response.json();
     return result;
-  }
+  };
 
   private fetch = async <T extends FetchParameters>(
     method: Method,
@@ -83,7 +91,7 @@ type Parameters<T> = {
   limit?: number;
   order_by?: T;
   order_dir?: OrderDir;
-  status?: FetchParameters['status']
+  status?: FetchParameters['status'];
 };
 
 type Filter = {
@@ -92,7 +100,9 @@ type Filter = {
   value: number | number[] | string | string[];
 };
 type FetchParameters = {
-  block_index?: number;block_indexes?: number[]
+  assets?: string[];
+  block_index?: number;
+  block_indexes?: number[];
   filters?: Filter[];
   order_by?: string;
   order_dir?: OrderDir;

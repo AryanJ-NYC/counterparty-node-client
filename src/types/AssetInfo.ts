@@ -1,10 +1,10 @@
-type AssetInfo = {
-  asset: 'SHITCOINCARD';
-  asset_longname: null;
-  owner: '1GQhaWqejcGJ4GhQar7SjcCfadxvf5DNBD';
-  divisible: false;
-  locked: true;
-  supply: 3000;
-  description: 'http://myrarepepe.com/json/shit.json';
-  issuer: '1GQhaWqejcGJ4GhQar7SjcCfadxvf5DNBD';
+export type AssetInfo = {
+  asset: string;
+  asset_longname: string | null;
+  owner: string;
+  divisible: boolean;
+  locked: boolean;
+  supply: number;
+  description: string;
+  issuer: string;
 };

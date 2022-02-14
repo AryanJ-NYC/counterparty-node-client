@@ -1,10 +1,15 @@
 import fetch from 'cross-fetch';
 import type { O } from 'ts-toolbelt';
+import {
+  AssetInfo,
+  BlockInfo,
+  Dispense,
+  DispenseField,
+  Dispenser,
+  DispenserField,
+  Order,
+} from './types';
 import { toBase64 } from './lib';
-import type { BlockInfo } from './types/BlockInfo';
-import type { Dispense, DispenseField } from './types/Dispense';
-import type { Dispenser, DispenserField } from './types/Dispenser';
-import type { Order } from './types/Order';
 
 export class CounterpartyClient {
   constructor(

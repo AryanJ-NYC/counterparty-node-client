@@ -100,6 +100,7 @@ type Parameters<T> = {
       field: T;
     }
   >[];
+  filterop?: 'AND' | 'OR';
   limit?: number;
   order_by?: T;
   order_dir?: OrderDir;

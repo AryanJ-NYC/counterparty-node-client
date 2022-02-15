@@ -25,7 +25,9 @@ export class CounterpartyClient {
     return result;
   };
 
-  getAssets = async (optionalParameters?: Parameters<keyof Asset>) => {
+  getAssets = async (
+    optionalParameters?: Parameters<keyof Asset>
+  ): Promise<Asset[]> => {
     const response = await this.fetch('get_assets', optionalParameters);
     const { result } = await response.json();
     return result;

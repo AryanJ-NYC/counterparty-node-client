@@ -7,6 +7,7 @@ import {
   DispenseField,
   Dispenser,
   DispenserField,
+  Message,
   Order,
 } from './types';
 import { toBase64 } from './lib';
@@ -57,6 +58,12 @@ export class CounterpartyClient {
     optionalParameters?: Parameters<DispenseField>
   ): Promise<Dispense[]> => {
     const response = await this.fetch('get_dispenses', optionalParameters);
+    const { result } = await response.json();
+    return result;
+  };
+
+  getMessages = async (block_index: number): Promise<Message[]> => {
+    const response = await this.fetch('get_messages', { block_index });
     const { result } = await response.json();
     return result;
   };

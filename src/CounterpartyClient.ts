@@ -7,6 +7,7 @@ import {
   DispenseField,
   Dispenser,
   DispenserField,
+  MempoolMessage,
   Message,
   Order,
 } from './types';
@@ -58,6 +59,12 @@ export class CounterpartyClient {
     optionalParameters?: Parameters<DispenseField>
   ): Promise<Dispense[]> => {
     const response = await this.fetch('get_dispenses', optionalParameters);
+    const { result } = await response.json();
+    return result;
+  };
+
+  getMempool = async (): Promise<MempoolMessage[]> => {
+    const response = await this.fetch('get_mempool');
     const { result } = await response.json();
     return result;
   };

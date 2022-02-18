@@ -8,6 +8,14 @@ export type Message = {
 };
 export type MessageField = keyof Message;
 
+export type MempoolMessage = {
+  tx_hash: string;
+  command: MessageCommands;
+  category: MessageCategories;
+  bindings: string;
+  timestamp: number;
+};
+
 type MessageCategories =
   | 'credits'
   | 'debits'

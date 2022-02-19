@@ -13,6 +13,7 @@ import {
 } from './types';
 import { toBase64 } from './lib';
 import { Asset } from './types/Asset';
+import { Balance } from './types/Balance';
 
 export class CounterpartyClient {
   constructor(
@@ -31,6 +32,14 @@ export class CounterpartyClient {
     optionalParameters?: Parameters<keyof Asset>
   ): Promise<Asset[]> => {
     const response = await this.fetch('get_assets', optionalParameters);
+    const { result } = await response.json();
+    return result;
+  };
+
+  getBalances = async (
+    optionalParameters?: Parameters<keyof Balance>
+  ): Promise<Balance[]> => {
+    const response = await this.fetch('get_balances', optionalParameters);
     const { result } = await response.json();
     return result;
   };

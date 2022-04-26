@@ -126,6 +126,7 @@ type Parameters<T> = {
     }
   >[];
   filterop?: 'AND' | 'OR';
+  offset?: number;
   limit?: number;
   order_by?: T;
   order_dir?: OrderDir;

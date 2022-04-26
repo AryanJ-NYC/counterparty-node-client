@@ -142,6 +142,7 @@ type FetchParameters = {
   block_index?: number;
   block_indexes?: number[];
   filters?: Filter[];
+  offset?: number;
   order_by?: string;
   order_dir?: OrderDir;
   limit?: number;

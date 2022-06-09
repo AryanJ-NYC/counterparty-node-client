@@ -1,20 +1,20 @@
 import fetch from 'cross-fetch';
 import type { O } from 'ts-toolbelt';
 import {
+  Asset,
   AssetInfo,
+  Balance,
   BlockInfo,
   Dispense,
   DispenseField,
   Dispenser,
   DispenserField,
+  Issuance,
   MempoolMessage,
   Message,
   Order,
-  Issuance,
 } from './types';
 import { toBase64 } from './lib';
-import { Asset } from './types/Asset';
-import { Balance } from './types/Balance';
 
 export class CounterpartyClient {
   constructor(
@@ -194,8 +194,7 @@ type Method =
   | 'get_blocks'
   | 'get_running_info'
   | 'get_element_counts'
-  | 'get_unspent_txouts'
-  | 'get_issuances';
+  | 'get_unspent_txouts';
 type OrderDir = 'asc' | 'desc';
 type Op =
   | '=='

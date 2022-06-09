@@ -1,19 +1,20 @@
 import fetch from 'cross-fetch';
 import type { O } from 'ts-toolbelt';
 import {
+  Asset,
   AssetInfo,
+  Balance,
   BlockInfo,
   Dispense,
   DispenseField,
   Dispenser,
   DispenserField,
+  Issuance,
   MempoolMessage,
   Message,
   Order,
 } from './types';
 import { toBase64 } from './lib';
-import { Asset } from './types/Asset';
-import { Balance } from './types/Balance';
 
 export class CounterpartyClient {
   constructor(
@@ -88,6 +89,14 @@ export class CounterpartyClient {
     optionalParameters?: Parameters<keyof Order>
   ): Promise<Order[]> => {
     const response = await this.fetch('get_orders', optionalParameters);
+    const { result } = await response.json();
+    return result;
+  };
+
+  getIssuances = async (
+    optionalParameters?: Parameters<keyof Issuance>
+  ): Promise<Issuance[]> => {
+    const response = await this.fetch('get_issuances', optionalParameters);
     const { result } = await response.json();
     return result;
   };

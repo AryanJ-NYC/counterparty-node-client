@@ -10,6 +10,7 @@ import {
   MempoolMessage,
   Message,
   Order,
+  Issuance,
 } from './types';
 import { toBase64 } from './lib';
 import { Asset } from './types/Asset';
@@ -88,6 +89,14 @@ export class CounterpartyClient {
     optionalParameters?: Parameters<keyof Order>
   ): Promise<Order[]> => {
     const response = await this.fetch('get_orders', optionalParameters);
+    const { result } = await response.json();
+    return result;
+  };
+
+  getIssuances = async (
+    optionalParameters?: Parameters<keyof Issuance>
+  ): Promise<Issuance[]> => {
+    const response = await this.fetch('get_issuances', optionalParameters);
     const { result } = await response.json();
     return result;
   };
@@ -185,7 +194,8 @@ type Method =
   | 'get_blocks'
   | 'get_running_info'
   | 'get_element_counts'
-  | 'get_unspent_txouts';
+  | 'get_unspent_txouts'
+  | 'get_issuances';
 type OrderDir = 'asc' | 'desc';
 type Op =
   | '=='

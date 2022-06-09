@@ -6,3 +6,4 @@ export * from './Dispense';
 export * from './Dispenser';
 export * from './Message';
 export * from './Order';
+export * from './Issuance';

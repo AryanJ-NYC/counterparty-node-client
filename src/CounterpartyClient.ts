@@ -1,4 +1,3 @@
-import fetch from 'cross-fetch';
 import type { O } from 'ts-toolbelt';
 import {
   Asset,

@@ -1,7 +1,7 @@
 {
-  "version": "0.9.0",
+  "version": "0.12.0",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "dist/counterparty-node-client.esm.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
@@ -12,10 +12,10 @@
   },
   "scripts": {
     "start": "tsdx watch",
-    "build": "tsdx build",
+    "build": "tsdx build --format esm",
     "test": "tsdx test",
     "lint": "tsdx lint",
-    "prepare": "tsdx build",
+    "prepare": "yarn build",
     "size": "size-limit",
     "analyze": "size-limit --why"
   },
@@ -34,10 +34,6 @@
   "author": "Aryan Jabbari <AryanJabbari@gmail.com>",
   "module": "dist/counterparty-node-client.esm.js",
   "size-limit": [
-    {
-      "path": "dist/counterparty-node-client.cjs.production.min.js",
-      "limit": "10 KB"
-    },
     {
       "path": "dist/counterparty-node-client.esm.js",
       "limit": "10 KB"

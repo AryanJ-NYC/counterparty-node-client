@@ -1,5 +1,5 @@
 import type { O } from 'ts-toolbelt';
-import {
+import type {
   Asset,
   AssetInfo,
   Balance,

@@ -22,6 +22,24 @@ export class CounterpartyClient {
     private readonly password: string
   ) {}
 
+  createSendTx = async (
+    params: O.Required<
+      Pick<
+        FetchParameters,
+        | 'allow_unconfirmed_inputs'
+        | 'asset'
+        | 'destination'
+        | 'quantity'
+        | 'source'
+      >,
+      'asset' | 'destination' | 'quantity' | 'source'
+    >
+  ): Promise<string> => {
+    const response = await this.fetch('create_send', params);
+    const { result } = await response.json();
+    return result;
+  };
+
   getAssetInfo = async (assets: string[]): Promise<AssetInfo[]> => {
     const response = await this.fetch('get_asset_info', { assets });
     const { result } = await response.json();
@@ -127,12 +145,7 @@ export class CounterpartyClient {
 }
 
 type Parameters<T> = {
-  filters?: O.Overwrite<
-    Filter,
-    {
-      field: T;
-    }
-  >[];
+  filters?: O.Overwrite<Filter, { field: T }>[];
   filterop?: 'AND' | 'OR';
   offset?: number;
   limit?: number;
@@ -147,17 +160,23 @@ type Filter = {
   value: number | number[] | string | string[];
 };
 type FetchParameters = {
+  allow_unconfirmed_inputs?: boolean;
+  asset?: string;
   assets?: string[];
   block_index?: number;
   block_indexes?: number[];
+  destination?: string;
   filters?: Filter[];
   offset?: number;
   order_by?: string;
   order_dir?: OrderDir;
   limit?: number;
+  quantity?: number;
+  source?: string;
   status?: 0 | 1 | 10 | 'filled' | 'open';
 };
 type Method =
+  | 'create_send'
   | 'get_assets'
   | 'get_balances'
   | 'get_bets'

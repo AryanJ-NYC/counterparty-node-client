@@ -36,7 +36,10 @@ export class CounterpartyClient {
     >
   ): Promise<string> => {
     const response = await this.fetch('create_send', params);
-    const { result } = await response.json();
+    const { error, result } = await response.json();
+    if (error) {
+      throw error;
+    }
     return result;
   };
 
